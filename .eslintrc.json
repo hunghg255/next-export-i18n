@@ -1,0 +1,6 @@
+{
+  "extends": ["next/core-web-vitals", "@hunghg255/eslint-config-react"],
+  "rules": {
+    "unicorn/prefer-export-from": "off"
+  }
+}
