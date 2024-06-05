@@ -1,10 +1,31 @@
 // import { useTranslation } from 'next-i18next';
 
+import Link from 'next/link';
+import { useTranslation } from 'next-i18next';
+
 import { makeStaticProps } from 'src/lib/getStatic';
 
 const Home = () => {
-  // const { t } = useTranslation('home');
-  return <>Home</>;
+  const { t } = useTranslation('home');
+  return (
+    <>
+      <h1>{t('home.title')}</h1>
+      <br />
+      <br />
+
+      <Link className='p-4 bg-[blue]' href={'/en'}>
+        EN
+      </Link>
+      <br />
+      <br />
+
+      <br />
+
+      <Link className='p-4 bg-[red]' href={'/vi'}>
+        VI
+      </Link>
+    </>
+  );
 };
 
 export default Home;

@@ -1,7 +1,3 @@
-const { withHydrationOverlay } = require('next-hydration-overlay/next');
-
-const { i18n } = require('./next-i18next.config');
-
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
@@ -12,7 +8,6 @@ const isProd = process.env.NODE_ENV === 'production';
 const nextConfig = {
   swcMinify: true,
   output: 'export',
-  // i18n,
   images: {
     minimumCacheTTL: 60,
     domains: ['s3-alpha-sig.figma.com'],
@@ -32,11 +27,9 @@ const nextConfig = {
       },
     ];
   },
-  experimental: {
-    images: {
-      unoptimized: true,
-    },
+  images: {
+    unoptimized: true,
   },
 };
 
-module.exports = isProd ? nextConfig : withHydrationOverlay()(withBundleAnalyzer(nextConfig));
+module.exports = isProd ? nextConfig : withBundleAnalyzer(nextConfig);
