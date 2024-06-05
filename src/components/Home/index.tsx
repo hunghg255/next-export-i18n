@@ -1,20 +1,42 @@
-import { useTranslation } from 'next-i18next';
+import React, { useCallback, useMemo, useState } from 'react';
 
-// import styles from './index.module.scss';
+import { useTranslation } from 'react-i18next';
 
-function Home() {
-  const { t } = useTranslation('home');
+import i18n from '~i18n/index';
+
+const Home = () => {
+  const { t } = useTranslation();
+  const [lng, setLng] = useState(i18n.language.slice(0, 2));
+
+  const onChange = useCallback(
+    (option: string) => {
+      i18n.changeLanguage(option);
+      setLng(option);
+    },
+    [lng],
+  );
+  const languages = useMemo(() => Object.keys(i18n.services.resourceStore.data), []);
 
   return (
     <>
-      <h1 className='text-3xl font-bold underline bg'>{t('home.title')}</h1>
-      <div className='flex'>
-        <div className='flex-none w-14 h-14'>01</div>
-        <div className='flex-initial w-64 ...'>02</div>
-        <div className='flex-initial w-32 ...'>03</div>
-      </div>
+      <h1> {t('hello')}</h1>
+
+      {languages.map((language) => (
+        <button
+          key={language}
+          onClick={() => onChange(language)}
+          style={{
+            backgroundColor: language === lng ? 'red' : 'blue',
+            color: language === lng ? 'white' : 'black',
+            padding: '10px',
+            margin: '10px',
+          }}
+        >
+          {language}
+        </button>
+      ))}
     </>
   );
-}
+};
 
 export default Home;

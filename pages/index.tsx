@@ -1,5 +1,17 @@
-// @ts-nocheck
+import React from 'react';
 
-import { Redirect } from 'src/lib/redirect';
+import dynamic from 'next/dynamic';
 
-export default Redirect;
+const Home = dynamic(() => import('@components/Home'), {
+  ssr: false,
+});
+
+const HomePage = () => {
+  return (
+    <>
+      <Home />
+    </>
+  );
+};
+
+export default HomePage;
